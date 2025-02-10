@@ -15,9 +15,10 @@ function App() {
     <>
       <Header claimCoins={claimCoins} />
       <Banner handleCoinClaims={handleCoinClaims} />
-      <Main />
+      <Main setCoins={setCoins} claimCoins={claimCoins} />
     </>
   );
 }
+
 
 export default App;

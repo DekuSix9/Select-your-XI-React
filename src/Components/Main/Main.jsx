@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import MainData from "./MainData";
 
-const Main = () => {
+const Main = ({ setCoins, claimCoins }) => {
   const [players, setPlayers] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [availablePlayers, setAvailablePlayers] = useState([]);
@@ -24,7 +25,12 @@ const Main = () => {
     }
 
     if (!availablePlayers.find(player => player.playerId === selectedPlayer.playerId)) {
-      setAvailablePlayers([...availablePlayers, selectedPlayer]);
+      if (claimCoins >= selectedPlayer.biddingPrice) {
+        setCoins(claimCoins - selectedPlayer.biddingPrice);
+        setAvailablePlayers([...availablePlayers, selectedPlayer]);
+      } else {
+        alert("Insufficient coins to select this player!");
+      }
     }
   };
 
@@ -40,7 +46,7 @@ const Main = () => {
           <button
             onClick={toggleVisibility}
             className="px-4 py-2 rounded-lg border-2 border-gray-100 bg-[#E7FE29] text-black font-semibold hover:bg-[#d6e726]">
-            {isVisible ? 'Hide Players' : 'Show Players'} ({availablePlayers.length}/6)
+            {isVisible ? 'Hide Players' : 'Available'} ({availablePlayers.length}/6)
           </button>
 
           <button className="px-4 py-2 rounded-lg border-2 border-gray-100 bg-gray-200 text-black hover:bg-gray-400">
@@ -80,5 +86,6 @@ const Main = () => {
     </div>
   );
 };
+
 
 export default Main;
