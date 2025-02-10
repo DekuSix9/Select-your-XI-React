@@ -10,7 +10,7 @@ const Header = ({ claimCoins }) => {
       </div>
 
       <div>
-        <ul className="flex space-x-12 mr-6">
+        <ul className="flex space-x-12 mr-6 cursor-pointer">
           <li>Home</li>
           <li>Fixture</li>
           <li>Teams</li>
